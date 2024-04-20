@@ -16,7 +16,7 @@ import java.util.Optional;
 public class MemberService {
     private final MemberRepository memberRepository;
     private final RoomRepository roomRepository;
-    public String entrance(Long roomId) throws MessageDeliveryException{
+    public EntranceResponse entrance(Long roomId) throws MessageDeliveryException{
         Optional<Room> optionalRoom = roomRepository.findById(roomId);
         try{
             if(optionalRoom.isEmpty() || optionalRoom.get().getNumber()>=4){
@@ -28,11 +28,11 @@ public class MemberService {
                 roomRepository.save(room);
                 Member member = Member.builder().roomId(room).build();
                 memberRepository.save(member);
-                return "success";
+                return new EntranceResponse("success",member.getId());
             }
         }
         catch(Exception e) {
-            return "존재하지 않은 방이거나 방 수용인원을 초과하였습니다.";
+            return new EntranceResponse("error : 존재하지 않은 방이거나 방 수용인원을 초과하였습니다.",0L);
         }
     }
 }
