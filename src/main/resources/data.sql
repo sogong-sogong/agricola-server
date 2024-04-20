@@ -1,0 +1,1 @@
+insert into ROOM(number) values (0);
