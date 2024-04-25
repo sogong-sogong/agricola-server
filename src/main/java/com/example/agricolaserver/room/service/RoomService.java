@@ -4,6 +4,7 @@ import com.example.agricolaserver.room.dto.CreateRoomDTO;
 import com.example.agricolaserver.room.dto.GetRoomDTO;
 import com.example.agricolaserver.room.domain.Room;
 import com.example.agricolaserver.room.repository.RoomRepository;
+import com.example.agricolaserver.round.service.RoundService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,10 +19,12 @@ import java.util.List;
 @Transactional
 public class RoomService {
     private final RoomRepository roomRepository;
+    private final RoundService roundService;
     public ResponseEntity<CreateRoomDTO> createRoom(){
         try {
             Room room  = Room.builder().number(0).build();
             roomRepository.save(room);
+            roundService.initRound(room);
             return new ResponseEntity<>(new CreateRoomDTO(room.getId()), HttpStatus.OK);
         }
         catch(Exception e) {

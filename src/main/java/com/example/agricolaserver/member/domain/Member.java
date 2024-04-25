@@ -16,7 +16,7 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    private Room roomId;
+    private Room room;
     private Integer number;
     @ColumnDefault("0")
     private Integer openAuxiliary;
@@ -27,7 +27,7 @@ public class Member {
     private Integer openJob;
     @Builder
     public Member(Room roomId, Integer number){
-        this.roomId = roomId;
+        this.room = roomId;
         this.number = number;
     }
 }
