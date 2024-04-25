@@ -2,10 +2,11 @@ package com.example.agricolaserver.member.domain;
 
 import com.example.agricolaserver.room.domain.Room;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -17,6 +18,13 @@ public class Member {
     @ManyToOne
     private Room roomId;
     private Integer number;
+    @ColumnDefault("0")
+    private Integer openAuxiliary;
+    @ColumnDefault("7")
+    private Integer hiddenAuxiliary;
+    private Integer equipment;
+    @ColumnDefault("0")
+    private Integer openJob;
     @Builder
     public Member(Room roomId, Integer number){
         this.roomId = roomId;
