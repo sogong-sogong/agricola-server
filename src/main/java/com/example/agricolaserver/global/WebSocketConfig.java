@@ -14,6 +14,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws-stomp")   //SockJS 연결 주소
                 .setAllowedOriginPatterns("*"); // 허용하는 도메인 주소 (일단 모두 허용으로 바꾸었다.)
+
     }
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {

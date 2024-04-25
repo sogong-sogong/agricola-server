@@ -1,5 +1,7 @@
 package com.example.agricolaserver.member.service;
 
+import com.example.agricolaserver.global.ResponseStatus;
+import com.example.agricolaserver.member.dto.EntranceDTO;
 import com.example.agricolaserver.member.domain.Member;
 import com.example.agricolaserver.member.repository.MemberRepository;
 import com.example.agricolaserver.room.domain.Room;
@@ -16,7 +18,7 @@ import java.util.Optional;
 public class MemberService {
     private final MemberRepository memberRepository;
     private final RoomRepository roomRepository;
-    public EntranceResponse entrance(Long roomId) throws MessageDeliveryException{
+    public EntranceDTO entrance(Long roomId) throws MessageDeliveryException{
         Optional<Room> optionalRoom = roomRepository.findById(roomId);
         try{
             if(optionalRoom.isEmpty() || optionalRoom.get().getNumber()>=4){
@@ -26,13 +28,13 @@ public class MemberService {
                 Room room = roomRepository.findById(roomId).orElseThrow(Exception::new);
                 room = Room.builder().id(roomId).number(room.getNumber()+1).build();
                 roomRepository.save(room);
-                Member member = Member.builder().roomId(room).build();
+                Member member = Member.builder().roomId(room).number(room.getNumber()).build();
                 memberRepository.save(member);
-                return new EntranceResponse("success",member.getId());
+                return new EntranceDTO(ResponseStatus.OK,member.getId());
             }
         }
         catch(Exception e) {
-            return new EntranceResponse("error : 존재하지 않은 방이거나 방 수용인원을 초과하였습니다.",0L);
+            return new EntranceDTO(ResponseStatus.BAD_REQUEST + " : 존재하지 않은 방이거나 방 수용인원을 초과하였습니다.",null);
         }
     }
 }

@@ -16,8 +16,10 @@ public class Member {
     private Long id;
     @ManyToOne
     private Room roomId;
+    private Integer number;
     @Builder
-    public Member(Room roomId){
+    public Member(Room roomId, Integer number){
         this.roomId = roomId;
+        this.number = number;
     }
 }
