@@ -18,10 +18,11 @@ public class Round {
     private Room room;
     @Column(length = 30,nullable = false)
     private String title;
-
+    private Boolean open;
     @Builder
-    public Round(Room roomId, String title){
+    public Round(Room roomId, String title, Boolean open){
         this.room = roomId;
         this.title = title;
+        this.open = open;
     }
 }
