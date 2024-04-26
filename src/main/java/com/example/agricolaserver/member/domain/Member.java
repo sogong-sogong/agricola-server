@@ -11,8 +11,11 @@ import java.util.List;
 
 @Entity
 @Getter
+@Setter
 @RequiredArgsConstructor
 @DynamicInsert
+@Builder
+@AllArgsConstructor
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,9 +30,4 @@ public class Member {
     private Integer equipment;
     @ColumnDefault("0")
     private Integer openJob;
-    @Builder
-    public Member(Room roomId, Integer number){
-        this.room = roomId;
-        this.number = number;
-    }
 }
