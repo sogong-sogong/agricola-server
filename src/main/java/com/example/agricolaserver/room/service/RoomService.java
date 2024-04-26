@@ -1,5 +1,7 @@
 package com.example.agricolaserver.room.service;
 
+import com.example.agricolaserver.common.domain.Common;
+import com.example.agricolaserver.common.repository.CommonRepository;
 import com.example.agricolaserver.room.dto.CreateRoomDTO;
 import com.example.agricolaserver.room.dto.GetRoomDTO;
 import com.example.agricolaserver.room.domain.Room;
@@ -20,11 +22,14 @@ import java.util.List;
 public class RoomService {
     private final RoomRepository roomRepository;
     private final RoundService roundService;
+    private final CommonRepository commonRepository;
     public ResponseEntity<CreateRoomDTO> createRoom(){
         try {
             Room room  = Room.builder().number(0).build();
-            roomRepository.save(room);
-            roundService.initRound(room);
+            roomRepository.save(room); //룸 생성
+            roundService.initRound(room); //라운드카드 초기화
+            Common common = Common.builder().roomId(room).build(); //공동창고 초기화
+            commonRepository.save(common);
             return new ResponseEntity<>(new CreateRoomDTO(room.getId()), HttpStatus.OK);
         }
         catch(Exception e) {

@@ -32,7 +32,7 @@ public class Storage {
     @ColumnDefault("0")
     private Integer vegetable;
     @ColumnDefault("0")
-    private Integer begging;
+    private Integer food;
     @ColumnDefault("0")
     private Integer sheep;
     @ColumnDefault("0")
