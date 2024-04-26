@@ -8,10 +8,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 @Getter
 @Entity
 @RequiredArgsConstructor
+@DynamicInsert
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -4,6 +4,7 @@ import com.example.agricolaserver.room.domain.Room;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @Getter
 @RequiredArgsConstructor
+@DynamicInsert
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
