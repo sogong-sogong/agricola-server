@@ -35,11 +35,11 @@ public class MemberService {
                 memberRepository.save(member);
                 Storage storage = Storage.builder().memberId(member).build();
                 storageRepository.save(storage);
-                return new EntranceDTO(ResponseStatus.OK,member.getId());
+                return new EntranceDTO(ResponseStatus.OK,member.getId(),member.getNumber());
             }
         }
         catch(Exception e) {
-            return new EntranceDTO(ResponseStatus.BAD_REQUEST + " : 존재하지 않은 방이거나 방 수용인원을 초과하였습니다.",null);
+            return new EntranceDTO(ResponseStatus.BAD_REQUEST + " : 존재하지 않은 방이거나 방 수용인원을 초과하였습니다.",null,null);
         }
     }
 }
