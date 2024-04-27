@@ -18,18 +18,14 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer round;
-    private Integer starter; //선플레이어의 id
+    private Integer starter; //선플레이어의 number
     private Integer turn;
     @ColumnDefault("0")
-    private Integer number;
-
+    private Integer number; //멤버 수
     @Builder
-    public Room(Long id,Integer number){
+    public Room(Long id,Integer starter, Integer number){
         this.id = id;
-        this.number = number;
-    }
-    @Builder
-    public Room(Integer number){
+        this.starter = starter;
         this.number = number;
     }
 }

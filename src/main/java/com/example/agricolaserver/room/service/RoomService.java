@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @RequiredArgsConstructor
 @Service
@@ -34,7 +35,9 @@ public class RoomService {
     private final StorageRepository storageRepository;
     public ResponseEntity<CreateRoomDTO> createRoom(){
         try {
-            Room room  = Room.builder().number(0).build();
+            Random random = new Random();
+            Integer starter = random.nextInt(4)+1;
+            Room room  = Room.builder().starter(starter).build();
             roomRepository.save(room); //룸 생성
             roundService.initRound(room); //라운드카드 초기화
             Common common = Common.builder().roomId(room).build(); //공동창고 초기화
