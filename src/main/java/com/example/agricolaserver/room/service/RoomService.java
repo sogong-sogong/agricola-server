@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+import static com.example.agricolaserver.room.dto.GetRoomDTO.makeRoomDTO;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -53,7 +55,7 @@ public class RoomService {
             List<Room> rooms = roomRepository.findAll();
             List<GetRoomDTO> allRoom = new ArrayList<>();
             for(Room room:rooms){
-                allRoom.add(new GetRoomDTO(room.getId(),room.getNumber()));
+                allRoom.add(makeRoomDTO(room));
             };
             return new ResponseEntity<>(allRoom, HttpStatus.OK);
         }
@@ -68,7 +70,7 @@ public class RoomService {
             }
             else if(memberRepository.findById(entranceRequest.memberId()).get().getRoom()==null){ //멤버의 게임방 속성이 null이면
                 Room room = optionalRoom.get();
-                room = Room.builder().id(roomId).number(room.getNumber()+1).build(); //방 인원 변경
+                room.addNumber();
                 roomRepository.save(room);
                 Member member = memberRepository.findById(entranceRequest.memberId()).get();
                 member.setRoom(room); //멤버의 room,number 설정

@@ -23,9 +23,10 @@ public class Room {
     @ColumnDefault("0")
     private Integer number; //멤버 수
     @Builder
-    public Room(Long id,Integer starter, Integer number){
-        this.id = id;
+    public Room(Integer starter){
         this.starter = starter;
-        this.number = number;
+    }
+    public void addNumber(){
+        this.number++;
     }
 }
