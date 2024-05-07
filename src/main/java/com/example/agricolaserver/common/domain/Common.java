@@ -32,7 +32,7 @@ public class Common {
     private Integer grain;
     @ColumnDefault("20") //16 + 4
     private Integer vegetable;
-    @ColumnDefault("76")
+    @ColumnDefault("65") //76-3*3-2
     private Integer food;
     @ColumnDefault("22") // 낱개 자원 18 + 자원 토큰 4
     private Integer sheep;

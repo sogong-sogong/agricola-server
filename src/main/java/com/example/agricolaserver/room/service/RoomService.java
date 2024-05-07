@@ -19,10 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.MessageDeliveryException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 import static com.example.agricolaserver.room.dto.GetRoomDTO.makeRoomDTO;
 
@@ -76,7 +73,13 @@ public class RoomService {
                 member.setRoom(room); //멤버의 room,number 설정
                 member.setNumber(room.getNumber());
                 memberRepository.save(member);
-                Storage storage = Storage.builder().memberId(member).build(); //멤버 자원 초기화
+                Integer food;
+                if(Objects.equals(member.getNumber(), room.getStarter())){
+                    food = 2;
+                }
+                else
+                    food=3;
+                Storage storage = Storage.builder().memberId(member).food(food).build(); //멤버 자원 초기화
                 storageRepository.save(storage);
                 return new EntranceResponse(member.getId(),member.getNumber());
             }

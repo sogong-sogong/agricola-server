@@ -46,7 +46,8 @@ public class Storage {
     @ColumnDefault("4")
     private Integer cowshed;
     @Builder
-    public Storage(Member memberId){
+    public Storage(Member memberId,Integer food){
         this.member = memberId;
+        this.food = food;
     }
 }
