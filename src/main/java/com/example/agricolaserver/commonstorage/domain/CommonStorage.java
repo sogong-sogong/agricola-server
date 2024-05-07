@@ -1,4 +1,4 @@
-package com.example.agricolaserver.common.domain;
+package com.example.agricolaserver.commonstorage.domain;
 import com.example.agricolaserver.room.domain.Room;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -14,7 +14,7 @@ import org.hibernate.annotations.DynamicInsert;
 @Entity
 @RequiredArgsConstructor
 @DynamicInsert
-public class Common {
+public class CommonStorage {
     @Id
     private Long id;
     @OneToOne
@@ -42,7 +42,7 @@ public class Common {
     private Integer cow;
 
     @Builder
-    public Common(Room roomId){
+    public CommonStorage(Room roomId){
         this.room = roomId;
 
     }

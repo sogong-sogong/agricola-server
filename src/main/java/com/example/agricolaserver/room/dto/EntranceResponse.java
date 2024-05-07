@@ -1,4 +1,4 @@
 package com.example.agricolaserver.room.dto;
 
-public record EntranceResponse(Long memberId, Integer number) {
+public record EntranceResponse(Long memberId, Integer number,Boolean starter) {
 }
