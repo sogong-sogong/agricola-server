@@ -6,9 +6,12 @@ import com.example.agricolaserver.room.dto.EntranceResponse;
 import com.example.agricolaserver.room.dto.GetRoomDTO;
 import com.example.agricolaserver.room.service.RoomService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +26,7 @@ import java.util.List;
 @RequestMapping("/room")
 public class RoomController {
     private final RoomService roomService;
+    private final RabbitTemplate rabbitTemplate;
 
     @GetMapping(path = "create")
     public ResponseEntity<CreateRoomDTO> createRoom(){
@@ -33,10 +37,14 @@ public class RoomController {
     public ResponseEntity<List<GetRoomDTO>> getAllRoom(){
         return roomService.getAllRoom();
     }
-
-    @MessageMapping("room/{roomId}")
-    @SendTo("/sub/room/{roomId}")
-    public EntranceResponse entrance(@DestinationVariable Long roomId, EntranceRequest entranceRequest){
+    private final static String ROOM_EXCHANGE_NAME = "room.exchange";
+    private final static String ROOM_QUEUE_NAME = "room.queue";
+    @MessageMapping("room.enter.{roomId}")
+    @SendTo("/sub/room.{roomId}")
+    public EntranceResponse entrance(@DestinationVariable Long roomId, @Payload  EntranceRequest entranceRequest){
+//    @MessageMapping("room.enter.{roomId}")
+        System.out.println("hello");
+        rabbitTemplate.convertAndSend(ROOM_EXCHANGE_NAME,"enter.room."+roomId,entranceRequest);
         return roomService.entrance(roomId,entranceRequest);
     }
 }
