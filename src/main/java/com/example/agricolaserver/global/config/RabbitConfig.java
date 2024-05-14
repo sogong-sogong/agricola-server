@@ -56,7 +56,7 @@ public class RabbitConfig {
         factory.setPort(5672);
         factory.setVirtualHost("/");
         factory.setUsername("admin");
-        factory.setPassword("admin");
+        factory.setPassword("agricola");
         return factory;
     }
 
