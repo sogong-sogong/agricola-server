@@ -3,21 +3,13 @@ spring:
     driver-class-name: org.h2.Driver
     username: sa
     password:
-    url: jdbc:h2:mem:test
+    url: jdbc:h2:~/test
   h2:
     console:
       enabled: true
       path: /h2-console
       settings:
         web-allow-others: true
-  rabbitmq:
-    port: 5672
-    host: 52.78.128.39
-    username: admin
-    password: agricola
-    virtual-host: /
-
-
 
   jpa:
     open-in-view: false
@@ -26,12 +18,3 @@ spring:
 springdoc:
   swagger-ui:
     path: /api-test
-
-rabbitmq:
-  exchange: test.exchange
-  keroro:
-    binding-key: keroro
-  geroro:
-    binding-key: geroro
-  garuru:
-    binding-key: garuru
