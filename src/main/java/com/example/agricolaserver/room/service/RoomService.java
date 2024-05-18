@@ -66,7 +66,6 @@ public class RoomService {
             for (Room room : rooms) {
                 allRoom.add(makeRoomDTO(room));
             }
-            ;
             return new ResponseEntity<>(allRoom, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
