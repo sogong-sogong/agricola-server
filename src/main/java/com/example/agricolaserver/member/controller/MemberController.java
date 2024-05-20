@@ -23,7 +23,7 @@ public class MemberController {
         return memberService.createMember();
     }
 
-    @GetMapping(path = "/{memberId}/card-counts")
+    @GetMapping(path = "/{memberId}/cardcount")
     public ResponseEntity<CardCountDTO> getCardCountsByMemberId(@PathVariable Long memberId) {
         return memberService.getCardCountsByMemberId(memberId);
     }

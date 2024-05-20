@@ -29,15 +29,12 @@ public class Member {
     @ColumnDefault("7")
     private Integer hiddenAuxiliary;
 
+    @ColumnDefault("0")
     private Integer equipment;
 
     @ColumnDefault("0")
     private Integer openJob;
 
-    @ColumnDefault("0")
+    @ColumnDefault("7")
     private Integer hiddenJob;
-
-    public int getTotalScore() {
-        return Score.calculateTotalScore(this);
-    }
 }
