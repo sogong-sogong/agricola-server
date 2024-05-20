@@ -5,9 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
-import org.springframework.boot.context.properties.bind.DefaultValue;
-
-import java.util.List;
 
 @Entity
 @Getter
@@ -20,14 +17,24 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
     private Room room;
+
     private Integer number;
+
     @ColumnDefault("0")
     private Integer openAuxiliary;
+
     @ColumnDefault("7")
     private Integer hiddenAuxiliary;
+
+    @ColumnDefault("0")
     private Integer equipment;
+
     @ColumnDefault("0")
     private Integer openJob;
+
+    @ColumnDefault("7")
+    private Integer hiddenJob;
 }
