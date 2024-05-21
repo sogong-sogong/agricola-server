@@ -25,14 +25,91 @@ public class RoundService {
         int complete = 0;
         while(complete<4){
             int num = random.nextInt(4);
-           Round card = cardList.get(num);
+            Round card = cardList.get(num);
             if(roundRepository.findByRoomAndTitle(roomId,card.getTitle()) == null ){
                 roundRepository.save(card);
                 complete++;
             }
         }
     }
+    public void round2(Room roomId){
+        List<com.example.agricolaserver.round.domain.Round> cardList = new ArrayList<>();
+        cardList.add(Round.builder().roomId(roomId).title("기본 가족 늘리기").open(false).build()); //가족 늘리기 한 후에 보조 설비 하나
+        cardList.add(Round.builder().roomId(roomId).title("서부 채석장").open(false).build()); // 돌 1개 (매 라운드 +1)
+        cardList.add(Round.builder().roomId(roomId).title("집 개조").open(false).build()); // 집 고치기 한 후에 주요 설비나 보조 설비 하나
+        int complete = 0;
+        while(complete<3){
+            int num = random.nextInt(3);
+            Round card = cardList.get(num);
+            if(roundRepository.findByRoomAndTitle(roomId,card.getTitle()) == null ){
+                roundRepository.save(card);
+                complete++;
+            }
+        }
+    }
+
+    public void round3(Room roomId){
+        List<com.example.agricolaserver.round.domain.Round> cardList = new ArrayList<>();
+        cardList.add(Round.builder().roomId(roomId).title("돼지 시장").open(false).build()); //돼지 1개 (매 라운드 +1)
+        cardList.add(Round.builder().roomId(roomId).title("채소 종자").open(false).build()); // 채소 1개
+        int complete = 0;
+        while(complete<2){
+            int num = random.nextInt(2);
+            Round card = cardList.get(num);
+            if(roundRepository.findByRoomAndTitle(roomId,card.getTitle()) == null ){
+                roundRepository.save(card);
+                complete++;
+            }
+        }
+    }
+
+    public void round4(Room roomId){
+        List<com.example.agricolaserver.round.domain.Round> cardList = new ArrayList<>();
+        cardList.add(Round.builder().roomId(roomId).title("소 시장").open(false).build()); // 소 1개 (매 라운드 +1)
+        cardList.add(Round.builder().roomId(roomId).title("동부 채석장").open(false).build()); // 돌 1개 (매 라운드 +1)
+        int complete = 0;
+        while(complete<2){
+            int num = random.nextInt(2);
+            Round card = cardList.get(num);
+            if(roundRepository.findByRoomAndTitle(roomId,card.getTitle()) == null ){
+                roundRepository.save(card);
+                complete++;
+            }
+        }
+    }
+
+    public void round5(Room roomId){
+        List<com.example.agricolaserver.round.domain.Round> cardList = new ArrayList<>();
+        cardList.add(Round.builder().roomId(roomId).title("급한 가족 늘리기").open(false).build()); // 빈방 없이 가족 늘리기
+        cardList.add(Round.builder().roomId(roomId).title("밭 농사").open(false).build()); // 밭 하나 일구기 그리고/또는 씨 뿌리기
+        int complete = 0;
+        while(complete<2){
+            int num = random.nextInt(2);
+            Round card = cardList.get(num);
+            if(roundRepository.findByRoomAndTitle(roomId,card.getTitle()) == null ){
+                roundRepository.save(card);
+                complete++;
+            }
+        }
+    }
+
+    public void round6(Room roomId){
+        List<com.example.agricolaserver.round.domain.Round> cardList = new ArrayList<>();
+        cardList.add(Round.builder().roomId(roomId).title("농장 개조").open(false).build()); //집 고치기 한 후에 울타리 치기
+
+        Round card = cardList.get(0);
+
+        if(roundRepository.findByRoomAndTitle(roomId,card.getTitle()) == null ){
+            roundRepository.save(card);
+        }
+    }
+
     public void initRound(Room roomId){
         round1(roomId);
+        round2(roomId);
+        round3(roomId);
+        round4(roomId);
+        round5(roomId);
+        round6(roomId);
     }
 }
