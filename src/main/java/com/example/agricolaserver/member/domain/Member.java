@@ -8,7 +8,6 @@ import org.hibernate.annotations.DynamicInsert;
 
 @Entity
 @Getter
-@Setter
 @RequiredArgsConstructor
 @DynamicInsert
 @Builder
@@ -37,4 +36,10 @@ public class Member {
 
     @ColumnDefault("7")
     private Integer hiddenJob;
+    public void setRoom(Room room){
+        this.room = room;
+    }
+    public void setNumber(Integer number){
+        this.number = number;
+    }
 }

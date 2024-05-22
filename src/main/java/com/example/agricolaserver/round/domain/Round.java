@@ -13,7 +13,7 @@ public class Round {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long orderNumber;
+    private Integer orderNumber;
     @ManyToOne
     private Room room;
     @Column(length = 30,nullable = false)
@@ -24,5 +24,11 @@ public class Round {
         this.room = roomId;
         this.title = title;
         this.open = open;
+    }
+    public void open(){
+        this.open = true;
+    }
+    public void setOrderNumber(Integer number){
+        this.orderNumber = number;
     }
 }

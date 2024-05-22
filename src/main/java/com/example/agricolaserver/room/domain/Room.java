@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
@@ -28,5 +29,13 @@ public class Room {
     }
     public void addNumber(){
         this.number++;
+    }
+    public void updateRound(){
+        if(this.round==null){
+            this.round = 1;
+        }
+        else{
+            this.round++;
+        }
     }
 }
