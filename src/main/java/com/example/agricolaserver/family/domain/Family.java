@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-@Setter
 @Entity
 @RequiredArgsConstructor
 public class Family {

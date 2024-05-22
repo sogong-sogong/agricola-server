@@ -6,7 +6,6 @@ import com.example.agricolaserver.family.domain.Family;
 import com.example.agricolaserver.family.repository.FamilyRepository;
 import com.example.agricolaserver.house.domain.House;
 import com.example.agricolaserver.house.repository.HouseRepository;
-import com.example.agricolaserver.job.repository.JobRepository;
 import com.example.agricolaserver.job.service.JobService;
 import com.example.agricolaserver.member.domain.Member;
 import com.example.agricolaserver.member.repository.MemberRepository;
@@ -16,7 +15,7 @@ import com.example.agricolaserver.room.dto.EntranceResponse;
 import com.example.agricolaserver.room.dto.GetRoomDTO;
 import com.example.agricolaserver.room.domain.Room;
 import com.example.agricolaserver.room.repository.RoomRepository;
-import com.example.agricolaserver.round.service.RoundService;
+import com.example.agricolaserver.round.service.InitRoundService;
 import com.example.agricolaserver.storage.domain.Storage;
 import com.example.agricolaserver.storage.repository.StorageRepository;
 import jakarta.transaction.Transactional;
@@ -35,7 +34,7 @@ import static com.example.agricolaserver.room.dto.GetRoomDTO.makeRoomDTO;
 @Transactional
 public class RoomService {
     private final RoomRepository roomRepository;
-    private final RoundService roundService;
+    private final InitRoundService initRoundService;
     private final CommonStorageRepository commonStorageRepository;
     private final MemberRepository memberRepository;
     private final StorageRepository storageRepository;
@@ -50,7 +49,7 @@ public class RoomService {
             Integer starter = random.nextInt(4) + 1;
             Room room = Room.builder().starter(starter).build();
             roomRepository.save(room); //룸 생성
-            roundService.initRound(room); //라운드카드 초기화
+            initRoundService.initRound(room); //라운드카드 초기화
             CommonStorage common = CommonStorage.builder().roomId(room).build(); //공동창고 초기화
             commonStorageRepository.save(common);
             return new ResponseEntity<>(new CreateRoomDTO(room.getId()), HttpStatus.OK);

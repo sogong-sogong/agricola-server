@@ -5,8 +5,11 @@ import com.example.agricolaserver.round.domain.Round;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface RoundRepository extends JpaRepository<Round,Long> {
     Round findByRoomAndTitle(Room room, String title);
-    Round findByTitle(String title);
+    List<Round> findByRoomAndOpen(Room room, Boolean open);
+    Round findByRoomAndOrderNumber(Room room, Integer orderNumber);
 }
