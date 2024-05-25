@@ -1,6 +1,7 @@
 package com.example.agricolaserver.room.service;
 
 import com.example.agricolaserver.room.domain.Room;
+import com.example.agricolaserver.room.dto.GetStarterDTO;
 import com.example.agricolaserver.room.dto.UpdateStarterRequest;
 import com.example.agricolaserver.room.dto.UpdateStarterResponse;
 import com.example.agricolaserver.room.repository.RoomRepository;
@@ -18,5 +19,10 @@ public class RoomStarterService {
                 .orElseThrow(() -> new RuntimeException("Room not found"));
         room.updateStarter(updateStarterRequest.starter());
         return new UpdateStarterResponse(room.getStarter());
+    }
+    public GetStarterDTO getStarter(Long id){
+        Room room = roomRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Room not found"));
+        return new GetStarterDTO(room.getStarter());
     }
 }
