@@ -38,4 +38,7 @@ public class Room {
             this.round++;
         }
     }
+    public void updateStarter(Integer number){
+        this.starter = number;
+    }
 }
