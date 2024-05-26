@@ -93,8 +93,8 @@ public class RoomService {
             House house1 = House.builder().member(member).type("wood").xy(6).build(); //집 초기화
             House house2 = House.builder().member(member).type("wood").xy(11).build();
             houseRepository.saveAll(Arrays.asList(house1, house2));
-            Family family1 = Family.builder().member(member).xy(6).status(true).build(); //가족 초기화
-            Family family2 = Family.builder().member(member).xy(11).status(true).build();
+            Family family1 = Family.builder().member(member).room(room).xy(6).status(true).build(); //가족 초기화
+            Family family2 = Family.builder().member(member).room(room).xy(11).status(true).build();
             familyRepository.saveAll(Arrays.asList(family1, family2)); //가족 초기화
             jobService.initJob(room, member);
             auxiliaryEquipmentService.initCard(room,member); //보조 설비 카드 초기화
