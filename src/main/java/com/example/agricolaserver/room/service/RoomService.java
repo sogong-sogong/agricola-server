@@ -16,6 +16,8 @@ import com.example.agricolaserver.room.dto.GetRoomDTO;
 import com.example.agricolaserver.room.domain.Room;
 import com.example.agricolaserver.room.repository.RoomRepository;
 import com.example.agricolaserver.round.service.InitRoundService;
+import com.example.agricolaserver.score.domain.Score;
+import com.example.agricolaserver.score.repository.ScoreRepository;
 import com.example.agricolaserver.storage.domain.Storage;
 import com.example.agricolaserver.storage.repository.StorageRepository;
 import jakarta.transaction.Transactional;
@@ -42,6 +44,7 @@ public class RoomService {
     private final FamilyRepository familyRepository;
     private final JobService jobService;
     private final AuxiliaryEquipmentService auxiliaryEquipmentService;
+    private final ScoreRepository scoreRepository;
 
     public ResponseEntity<CreateRoomDTO> createRoom() {
         try {
@@ -99,6 +102,8 @@ public class RoomService {
             jobService.initJob(room, member);
             auxiliaryEquipmentService.initCard(room,member); //보조 설비 카드 초기화
             Boolean starter = Objects.equals(room.getStarter(), member.getNumber());
+            Score score = Score.builder().member(member).build();
+            scoreRepository.save(score);
             return new EntranceResponse(member.getId(), member.getNumber(),starter);
         } else {
             throw new MessageDeliveryException("이미 게임방에 입장한 멤버입니다.");
