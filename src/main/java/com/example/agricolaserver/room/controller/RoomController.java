@@ -37,7 +37,7 @@ public class RoomController {
     private final static String ROOM_QUEUE_NAME = "room.queue";
     @MessageMapping("room/{roomId}")
     @SendTo("/sub/room/{roomId}")
-    public EntranceResponse entrance(@DestinationVariable Long roomId, EntranceRequest entranceRequest){
+    public List<EntranceResponse> entrance(@DestinationVariable Long roomId, EntranceRequest entranceRequest){
         return roomService.entrance(roomId,entranceRequest);
     }
 }

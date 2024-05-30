@@ -74,7 +74,7 @@ public class RoomService {
         }
     }
 
-    public EntranceResponse entrance(Long roomId, EntranceRequest entranceRequest) throws MessageDeliveryException {
+    public List<EntranceResponse> entrance(Long roomId, EntranceRequest entranceRequest) throws MessageDeliveryException {
         Optional<Room> optionalRoom = roomRepository.findById(roomId);
         if (optionalRoom.isEmpty() || optionalRoom.get().getNumber() >= 4 || memberRepository.findById(entranceRequest.memberId()).isEmpty()) {
             throw new MessageDeliveryException("방 번호나 멤버 id를 확인하세요.");
@@ -104,9 +104,18 @@ public class RoomService {
             Boolean starter = Objects.equals(room.getStarter(), member.getNumber());
             Score score = Score.builder().member(member).build();
             scoreRepository.save(score);
-            return new EntranceResponse(member.getId(), member.getNumber(),starter);
+            return getAllMember(room);
         } else {
             throw new MessageDeliveryException("이미 게임방에 입장한 멤버입니다.");
         }
+
+    }
+    public List<EntranceResponse> getAllMember(Room room){
+        List<Member> memberList = memberRepository.findAllByRoom(room);
+        List<EntranceResponse> entranceResponseList = new ArrayList<>();;
+        for(Member member:memberList){
+            entranceResponseList.add(new EntranceResponse(member.getId(),member.getNumber(), Objects.equals(room.getStarter(), member.getNumber())));
+        }
+        return entranceResponseList;
     }
 }
