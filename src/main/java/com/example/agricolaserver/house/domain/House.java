@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
+@Setter
 @Getter
 @Entity
 @RequiredArgsConstructor
@@ -22,6 +24,12 @@ public class House {
     @Builder
     public House(Member member, String type,Integer xy,Integer stock_type){
         this.member = member;
+        this.type = type;
+        this.xy = xy;
+        this.stock_type = stock_type;
+    }
+
+    public void updatehouse(String type,Integer xy,Integer stock_type){
         this.type = type;
         this.xy = xy;
         this.stock_type = stock_type;
