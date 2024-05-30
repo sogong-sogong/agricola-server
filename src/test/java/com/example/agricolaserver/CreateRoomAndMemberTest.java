@@ -45,21 +45,21 @@ public class CreateRoomAndMemberTest {
     }
 
 //    private List<Transport> createTransport() {
-//        List<Transport> transports = new ArrayList<>(1);
-//        transports.add(new WebSocketTransport(new StandardWebSocketClient()));
-//        return transports;
-//    }
-//    @DisplayName("룸 입장 테스트")
-//    @Test
-//    public void entranceRoom() throws Exception {
-//        StompSession session = webSocketStompClient.connectAsync(
-//                WEBSOCKET_URI+port+"/ws-stomp", new StompSessionHandlerAdapter() {
-//                }
-//        ).get();
-//                .get(1, TimeUnit.SECONDS);
-//        session.subscribe("/sub/room/1", new StompSessionHandlerAdapter() {
-//        });
-//        EntranceRequest entranceRequest = new EntranceRequest(1L);
+////        List<Transport> transports = new ArrayList<>(1);
+////        transports.add(new WebSocketTransport(new StandardWebSocketClient()));
+////        return transports;
+////    }
+////    @DisplayName("룸 입장 테스트")
+////    @Test
+////    public void entranceRoom() throws Exception {
+////        StompSession session = webSocketStompClient.connectAsync(
+////                WEBSOCKET_URI+port+"/ws-stomp", new StompSessionHandlerAdapter() {
+////                }
+////        ).get();
+////                .get(1, TimeUnit.SECONDS);
+////        session.subscribe("/sub/room/1", new StompSessionHandlerAdapter() {
+////        });
+////        EntranceRequest entranceRequest = new EntranceRequest(1L);
 //        session.send("/pub/room/1",entranceRequest);
 //        EntranceResponse response = responseQueue.poll(5, TimeUnit.SECONDS);
 //        System.out.println("되냐? 여기" + response);
