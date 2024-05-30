@@ -5,10 +5,12 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
 @Getter
+@Setter
 @Entity
 @RequiredArgsConstructor
 @DynamicInsert
@@ -49,5 +51,22 @@ public class Storage {
     public Storage(Member memberId,Integer food){
         this.member = memberId;
         this.food = food;
+    }
+
+    public void update(Integer wood, Integer clay, Integer stone, Integer weed, Integer grain, Integer vegetable, Integer food,
+                              Integer sheep, Integer pig, Integer cow, Integer family, Integer fence,Integer cowshed){
+        this.wood = wood;
+        this.clay = clay;
+        this.stone = stone;
+        this.weed = weed;
+        this.grain = grain;
+        this.vegetable = vegetable;
+        this.food = food;
+        this.sheep = sheep;
+        this.pig = pig;
+        this.cow = cow;
+        this.family = family;
+        this.fence = fence;
+        this.cowshed = cowshed;
     }
 }
