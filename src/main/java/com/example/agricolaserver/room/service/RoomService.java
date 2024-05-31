@@ -100,7 +100,7 @@ public class RoomService {
             House house2 = House.builder().member(member).type("wood").xy(11).build();
             houseRepository.saveAll(Arrays.asList(house1, house2));
             Farm farm1 = Farm.builder().member(member).type(0).xy(3).crop(0).build(); // 테스트용! 밭 초기화
-            Farm farm2 = Farm.builder().member(member).type(1).xy(3).crop(2).build(); // 테스트용! 밭 초기화
+            Farm farm2 = Farm.builder().member(member).type(1).xy(4).crop(2).build(); // 테스트용! 밭 초기화
             farmRepository.saveAll(Arrays.asList(farm1, farm2));
             Family family1 = Family.builder().member(member).room(room).xy(6).status(true).build(); //가족 초기화
             Family family2 = Family.builder().member(member).room(room).xy(11).status(true).build();

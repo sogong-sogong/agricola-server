@@ -31,19 +31,19 @@ public class FarmController {
     public ResponseEntity<List<FarmDTO>> getFarms(@PathVariable Long memberId) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new IllegalArgumentException("Member not found with id: " + memberId));
-
+    
         List<Farm> farms = farmRepository.findByMember(member);
-
+    
         if (farms.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-
+    
         List<FarmDTO> farmDTOs = farms.stream()
-                .map(FarmDTO::makeFarmDTO)
+                .map(farm -> FarmDTO.makeFarmDTO(farm))
                 .collect(Collectors.toList());
-
+    
         return ResponseEntity.ok(farmDTOs);
-    }
+    }    
 
     @PutMapping("/farmId/{farmId}")
     public ResponseEntity<GetFarmResponse> updateFarm(@PathVariable Long farmId, @RequestBody UpdateFarmRequestDTO updateFarmRequestDTO) {
