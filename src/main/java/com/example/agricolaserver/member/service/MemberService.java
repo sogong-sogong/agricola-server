@@ -4,6 +4,8 @@ import com.example.agricolaserver.member.domain.Member;
 import com.example.agricolaserver.member.dto.CreateMemberDTO;
 import com.example.agricolaserver.member.dto.CardCountDTO;
 import com.example.agricolaserver.member.repository.MemberRepository;
+import com.example.agricolaserver.room.domain.Room;
+import com.example.agricolaserver.room.dto.EntranceResponse;
 import com.example.agricolaserver.room.repository.RoomRepository;
 import com.example.agricolaserver.storage.repository.StorageRepository;
 import jakarta.transaction.Transactional;
@@ -12,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
