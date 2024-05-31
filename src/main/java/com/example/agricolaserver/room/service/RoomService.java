@@ -99,7 +99,7 @@ public class RoomService {
             Family family1 = Family.builder().member(member).room(room).xy(6).status(true).build(); //가족 초기화
             Family family2 = Family.builder().member(member).room(room).xy(11).status(true).build();
             familyRepository.saveAll(Arrays.asList(family1, family2)); //가족 초기화
-            jobService.initJob(room, member);
+            jobService.initCard(room, member);
             auxiliaryEquipmentService.initCard(room,member); //보조 설비 카드 초기화
             Boolean starter = Objects.equals(room.getStarter(), member.getNumber());
             Score score = Score.builder().member(member).build();
