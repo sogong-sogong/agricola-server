@@ -1,13 +1,13 @@
 package com.example.agricolaserver.auxiliaryequipment.dto;
 
 public class AuxiliaryEquipmentDTO {
-    private Long memberId;
-    private Long roomId;
-    private Integer auxId;
-    private Integer score;
-    private Integer open;
+    private final Long memberId;
+    private final Long roomId;
+    private final Integer auxId;
+    private final Integer score;
+    private final Integer open;
 
-    public AuxiliaryEquipmentDTO(Long memberId, Long roomId, Integer auxId, Integer score, Integer open) {
+    public AuxiliaryEquipmentDTO(Long memberId, Long roomId, int auxId, Integer score, int open) {
         this.memberId = memberId;
         this.roomId = roomId;
         this.auxId = auxId;
@@ -15,45 +15,31 @@ public class AuxiliaryEquipmentDTO {
         this.open = open;
     }
 
-    // Getter 및 Setter 메서드
-    public Long getMemberId() {
-        return memberId;
+    public AuxiliaryEquipmentDTO(int auxId, int score, int open) {
+        this.memberId = null; // 임시 값 설정
+        this.roomId = null;   // 임시 값 설정
+        this.auxId = auxId;
+        this.score = score;
+        this.open = open;
     }
 
-    public void setMemberId(Long memberId) {
-        this.memberId = memberId;
+    public Long getMemberId() {
+        return memberId;
     }
 
     public Long getRoomId() {
         return roomId;
     }
 
-    public void setRoomId(Long roomId) {
-        this.roomId = roomId;
-    }
-
     public Integer getAuxId() {
         return auxId;
-    }
-
-    public void setAuxId(Integer auxId) {
-        this.auxId = auxId;
     }
 
     public Integer getScore() {
         return score;
     }
 
-    public void setScore(Integer score) {
-        this.score = score;
-    }
-
     public Integer getOpen() {
         return open;
     }
-
-    public void setOpen(Integer open) {
-        this.open = open;
-    }
 }
-
