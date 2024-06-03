@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CommonStorageRepository extends JpaRepository<CommonStorage, Long> {
     CommonStorage findByRoom(Room room);
+    CommonStorage findByRoomId(Long roomId);
 }

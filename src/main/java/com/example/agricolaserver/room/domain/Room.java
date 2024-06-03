@@ -14,6 +14,7 @@ import org.hibernate.annotations.DynamicInsert;
 @Entity
 @RequiredArgsConstructor
 @DynamicInsert
+@Setter
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
