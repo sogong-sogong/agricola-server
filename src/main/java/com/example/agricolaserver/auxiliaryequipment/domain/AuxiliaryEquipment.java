@@ -12,19 +12,28 @@ import lombok.RequiredArgsConstructor;
 @Entity
 public class AuxiliaryEquipment {
     @Id
-    @Column(length = 30,nullable = false)
+    @Column(length = 30, nullable = false)
     String id;
+
     @ManyToOne
     Member member;
+
     @ManyToOne
     Room room;
+
     Integer score;
     Boolean open;
 
     @Builder
-    public AuxiliaryEquipment(String id,Member member, Room room){
+    public AuxiliaryEquipment(String id, Member member, Room room, Integer score, Boolean open) {
         this.id = id;
         this.member = member;
         this.room = room;
+        this.score = score;
+        this.open = open;
+    }
+
+    public boolean isOpen() {
+        return open;
     }
 }

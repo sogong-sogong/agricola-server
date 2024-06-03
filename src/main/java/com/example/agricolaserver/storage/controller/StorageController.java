@@ -7,10 +7,7 @@ import com.example.agricolaserver.storage.domain.Storage;
 import com.example.agricolaserver.storage.service.StorageService;
 import com.example.agricolaserver.storage.dto.GetStorageDTO;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/storage")
@@ -39,5 +36,24 @@ public class StorageController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PutMapping("/update/{memberId}")
+    public ResponseEntity<Storage> updateStorage(@PathVariable Long memberId,
+                                                 @RequestParam(required = false) Integer wood,
+                                                 @RequestParam(required = false) Integer clay,
+                                                 @RequestParam(required = false) Integer stone,
+                                                 @RequestParam(required = false) Integer weed,
+                                                 @RequestParam(required = false) Integer grain,
+                                                 @RequestParam(required = false) Integer vegetable,
+                                                 @RequestParam(required = false) Integer food,
+                                                 @RequestParam(required = false) Integer sheep,
+                                                 @RequestParam(required = false) Integer pig,
+                                                 @RequestParam(required = false) Integer cow,
+                                                 @RequestParam(required = false) Integer family,
+                                                 @RequestParam(required = false) Integer fence,
+                                                 @RequestParam(required = false) Integer cowshed) {
+        Storage updatedStorage = storageService.updateStorage(memberId, wood, clay, stone, weed, grain, vegetable, food, sheep, pig, cow, family, fence, cowshed);
+        return ResponseEntity.ok(updatedStorage);
     }
 }

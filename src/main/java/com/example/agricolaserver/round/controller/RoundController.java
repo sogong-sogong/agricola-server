@@ -8,11 +8,15 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RequiredArgsConstructor
-@Controller
+@RestController
+@RequestMapping("/round")
 public class RoundController {
     private final UpdateRoundService updateRoundService;
     private final SimpMessagingTemplate simpMessagingTemplate;
@@ -27,5 +31,11 @@ public class RoundController {
         }
         else
             simpMessagingTemplate.convertAndSend("/sub/room/"+roomId,new List[]{roundUpdateDTOS, boardResourcesService.updateResources(roomId)});
+    }
+
+    @GetMapping("/open/room/{roomId}")
+    public List<RoundDTO> getOpenRounds(@PathVariable Long roomId) {
+        return updateRoundService.getRound(roomId);
+//        return updateRoundService.getOpenRounds(roomId);
     }
 }

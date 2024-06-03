@@ -83,4 +83,12 @@ public class UpdateRoundService {
         }
         return roundDTOList;
     }
+
+//    public List<RoundDTO> getOpenRounds(Long roomId) {
+//        Room room = roomRepository.findById(roomId).orElseThrow(() -> new RuntimeException("Room not found"));
+//        List<Round> openRounds = roundRepository.findByRoomAndOpen(room, true);
+//        List<RoundDTO> openRoundDTOs = new ArrayList<>();
+//        openRounds.forEach(round -> openRoundDTOs.add(new RoundUpdateDTO(round.getTitle())));
+//        return openRoundDTOs;
+//    }
 }
