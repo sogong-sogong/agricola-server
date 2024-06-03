@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StorageRepository extends JpaRepository<Storage, Long> {
     Storage findByMember(Member member);
+    Storage findByMemberId(Long memberId);
 }

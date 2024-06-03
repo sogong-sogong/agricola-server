@@ -46,4 +46,18 @@ public class CommonStorage {
         this.room = roomId;
 
     }
+
+    public void updatestorage(Integer wood, Integer clay, Integer stone, Integer weed, Integer grain, Integer vegetable, Integer food,
+                              Integer sheep, Integer pig, Integer cow){
+        this.wood = wood;
+        this.clay = clay;
+        this.stone = stone;
+        this.weed = weed;
+        this.grain = grain;
+        this.vegetable = vegetable;
+        this.food = food;
+        this.sheep = sheep;
+        this.pig = pig;
+        this.cow = cow;
+    }
 }
