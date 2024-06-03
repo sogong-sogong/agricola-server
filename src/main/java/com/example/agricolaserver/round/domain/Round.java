@@ -19,6 +19,7 @@ public class Round {
     @Column(length = 30,nullable = false)
     private String title;
     private Boolean open;
+    private Integer number; //자원 개수
     @Builder
     public Round(Room roomId, String title, Boolean open){
         this.room = roomId;
@@ -31,4 +32,5 @@ public class Round {
     public void setOrderNumber(Integer number){
         this.orderNumber = number;
     }
+    public void setNumber(Integer number){this.number = number;}
 }

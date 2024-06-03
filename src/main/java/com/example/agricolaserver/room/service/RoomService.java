@@ -1,5 +1,6 @@
 package com.example.agricolaserver.room.service;
 import com.example.agricolaserver.auxiliaryequipment.service.AuxiliaryEquipmentService;
+import com.example.agricolaserver.boardresources.service.BoardResourcesService;
 import com.example.agricolaserver.commonstorage.domain.CommonStorage;
 import com.example.agricolaserver.commonstorage.repository.CommonStorageRepository;
 import com.example.agricolaserver.family.domain.Family;
@@ -45,6 +46,7 @@ public class RoomService {
     private final JobService jobService;
     private final AuxiliaryEquipmentService auxiliaryEquipmentService;
     private final ScoreRepository scoreRepository;
+    private final BoardResourcesService boardResourcesService;
 
     public ResponseEntity<CreateRoomDTO> createRoom() {
         try {
@@ -55,6 +57,7 @@ public class RoomService {
             initRoundService.initRound(room); //라운드카드 초기화
             CommonStorage common = CommonStorage.builder().roomId(room).build(); //공동창고 초기화
             commonStorageRepository.save(common);
+            boardResourcesService.initBoardResources(room); //행동판 자원 초기화
             return new ResponseEntity<>(new CreateRoomDTO(room.getId()), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new CreateRoomDTO(null), HttpStatus.BAD_REQUEST);
