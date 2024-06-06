@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class ScoreDTO {
     private Long memberId;
     private Integer score;
-    private Integer field;
+    private Integer farm;
     private Integer cage;
     private Integer grain;
     private Integer vegetable;
@@ -26,9 +26,9 @@ public class ScoreDTO {
     private Integer card;
     private Integer extra;
 
-    public ScoreDTO(Long memberId, Integer score, Integer field, Integer cage, Integer grain, Integer vegetable, Integer sheep, Integer pig, Integer cow, Integer blank, Integer fencedCowshed, Integer mudHouse, Integer stoneHouse, Integer family, Integer begging, Integer card, Integer extra) {
+    public ScoreDTO(Long memberId, Integer score, Integer farm, Integer cage, Integer grain, Integer vegetable, Integer sheep, Integer pig, Integer cow, Integer blank, Integer fencedCowshed, Integer mudHouse, Integer stoneHouse, Integer family, Integer begging, Integer card, Integer extra) {
         this.memberId = memberId;
-        this.field = field;
+        this.farm = farm;
         this.cage = cage;
         this.grain = grain;
         this.vegetable = vegetable;

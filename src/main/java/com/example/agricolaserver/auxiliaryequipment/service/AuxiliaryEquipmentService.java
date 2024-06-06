@@ -68,8 +68,8 @@ public class AuxiliaryEquipmentService {
     }
     
     // 보조 설비 조회 메소드 (memberid를 이용해 데이터베이스에서 조회)
-    public List<AuxiliaryEquipmentDTO> getAuxiliaryEquipmentsByMemberId(Long memberId) {
-        List<AuxiliaryEquipment> auxiliaryEquipments = auxiliaryEquipmentRepository.findAllByMember_Id(memberId);
+    public List<AuxiliaryEquipmentDTO> getAuxiliaryEquipmentsByMember(Member member) {
+        List<AuxiliaryEquipment> auxiliaryEquipments = auxiliaryEquipmentRepository.findByMember(member);
         return auxiliaryEquipments.stream()
                 .map(this::mapToAuxiliaryEquipmentDTO)
                 .collect(Collectors.toList());
@@ -84,5 +84,14 @@ public class AuxiliaryEquipmentService {
                 auxiliaryEquipment.getScore(),
                 auxiliaryEquipment.isOpen() ? 1 : 0
         );
+    }
+
+    // 각 멤버별로 AuxiliaryEquipment의 score의 총합을 반환하는 메소드
+    @Transactional
+    public int getAuxScoreByMember(Member member) {
+        List<AuxiliaryEquipment> auxiliaryEquipments = auxiliaryEquipmentRepository.findByMember(member);
+        return auxiliaryEquipments.stream()
+                .mapToInt(AuxiliaryEquipment::getScore)
+                .sum();
     }
 }
