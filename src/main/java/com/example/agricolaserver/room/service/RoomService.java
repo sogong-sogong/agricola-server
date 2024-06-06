@@ -2,6 +2,8 @@ package com.example.agricolaserver.room.service;
 import com.example.agricolaserver.auxiliaryequipment.service.AuxiliaryEquipmentService;
 import com.example.agricolaserver.commonstorage.domain.CommonStorage;
 import com.example.agricolaserver.commonstorage.repository.CommonStorageRepository;
+import com.example.agricolaserver.equipment.domain.Equipment;
+import com.example.agricolaserver.equipment.service.EquipmentService;
 import com.example.agricolaserver.family.domain.Family;
 import com.example.agricolaserver.family.repository.FamilyRepository;
 import com.example.agricolaserver.house.domain.House;
@@ -50,6 +52,7 @@ public class RoomService {
     private final FamilyRepository familyRepository;
     private final JobService jobService;
     private final AuxiliaryEquipmentService auxiliaryEquipmentService;
+    private final EquipmentService equipmentService;
     private final ScoreRepository scoreRepository;
 
     public ResponseEntity<CreateRoomDTO> createRoom() {
@@ -127,7 +130,10 @@ public class RoomService {
             jobService.initCard(room, member);
 
             // 보조 설비 카드 초기화
-            auxiliaryEquipmentService.initCard(room,member);
+            auxiliaryEquipmentService.initCard(room, member);
+
+            // [테스트용] 주요 설비 카드 초기화
+            // equipmentService.initCard(room, member);
 
             Boolean starter = Objects.equals(room.getStarter(), member.getNumber());
             Score score = Score.builder().member(member).build();

@@ -88,7 +88,7 @@ public class AuxiliaryEquipmentService {
 
     // 각 멤버별로 AuxiliaryEquipment의 score의 총합을 반환하는 메소드
     @Transactional
-    public int getAuxScoreByMemberId(Member member) {
+    public int getAuxScoreByMember(Member member) {
         List<AuxiliaryEquipment> auxiliaryEquipments = auxiliaryEquipmentRepository.findByMember(member);
         return auxiliaryEquipments.stream()
                 .mapToInt(AuxiliaryEquipment::getScore)

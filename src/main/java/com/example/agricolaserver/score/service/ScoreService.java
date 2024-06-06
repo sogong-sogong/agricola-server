@@ -11,7 +11,7 @@ import com.example.agricolaserver.farm.service.FarmService;
 import com.example.agricolaserver.cage.service.CageService;
 import com.example.agricolaserver.house.service.HouseService;
 import com.example.agricolaserver.auxiliaryequipment.service.AuxiliaryEquipmentService;
-// import com.example.agricolaserver.equipment.service.EquipmentService;
+import com.example.agricolaserver.equipment.service.EquipmentService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +27,7 @@ public class ScoreService {
     private final CageService cageService;
     private final HouseService houseService;
     private final AuxiliaryEquipmentService auxiliaryEquipmentService;
+    private final EquipmentService equipmentService;
     private final MemberRepository memberRepository;
 
     public ScoreService(ScoreRepository scoreRepository,
@@ -35,6 +36,7 @@ public class ScoreService {
                         CageService cageService,
                         HouseService houseService,
                         AuxiliaryEquipmentService auxiliaryEquipmentService,
+                        EquipmentService equipmentService,
                         MemberRepository memberRepository) {
         this.scoreRepository = scoreRepository;
         this.storageRepository = storageRepository;
@@ -42,6 +44,7 @@ public class ScoreService {
         this.cageService = cageService;
         this.houseService = houseService;
         this.auxiliaryEquipmentService = auxiliaryEquipmentService;
+        this.equipmentService = equipmentService;
         this.memberRepository = memberRepository;
     }
 
@@ -52,9 +55,6 @@ public class ScoreService {
         
         Score score = scoreRepository.findByMember(member);
         Storage storage = storageRepository.findByMember(member);
-
-        // 가족 점수 계산
-        score.setFamily(storage.getFamily() * 3);
     
         // 밭 점수 계산
         int farm = farmService.countFarmsByMember(member);
@@ -77,9 +77,6 @@ public class ScoreService {
             default -> cage >= 4 ? 4 : 0;
         };
         score.setCage(cage_score);
-
-        // 울타리+외양간이 있는 우리 점수 계산
-        score.setFencedCowshed(cageService.countCages2ByMember(member));
     
         // 곡물 점수 계산
         int grain = storage.getGrain();
@@ -91,7 +88,6 @@ public class ScoreService {
             default -> grain >= 8 ? 4 : 0;
         };
         score.setGrain(grain_score);
-    
 
         // 채소 점수 계산
         int vegetable = storage.getVegetable();
@@ -136,11 +132,7 @@ public class ScoreService {
             default -> cow >= 6 ? 4 : 0;
         };
         score.setCow(cow_score);
-    
-        // 집 점수 계산
-        score.setMudHouse(houseService.countMudHouseByMember(member)); // 진흙 집
-        score.setStoneHouse(houseService.countStoneHouseByMember(member) * 2); // 돌 집
-    
+
         // 빈칸 점수 계산
         int blank = -15
                     + farmService.countFarmsByMember(member)
@@ -151,9 +143,19 @@ public class ScoreService {
                     + houseService.countMudHouseByMember(member)
                     + houseService.countStoneHouseByMember(member);
         score.setBlank(blank);
-    
+        
+        // 울타리+외양간이 있는 우리 점수 계산
+        score.setFencedCowshed(cageService.countCages2ByMember(member));
+
+        // 집 점수 계산
+        score.setMudHouse(houseService.countMudHouseByMember(member)); // 진흙 집
+        score.setStoneHouse(houseService.countStoneHouseByMember(member) * 2); // 돌 집
+
+        // 가족 점수 계산
+        score.setFamily(storage.getFamily() * 3);
+
         // 카드 점수 계산
-        score.setCard(auxiliaryEquipmentService.getAuxScoreByMemberId(member));
+        score.setCard(auxiliaryEquipmentService.getAuxScoreByMember(member) + equipmentService.getEquScoreByMember(member));
 
         // 최종 점수 설정
         score.setScore(score.getFarm()
