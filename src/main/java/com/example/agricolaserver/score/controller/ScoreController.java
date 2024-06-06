@@ -18,7 +18,7 @@ public class ScoreController {
     @GetMapping("/member/{memberId}")
     public ResponseEntity<ScoreDTO> getScoreByMemberId(@PathVariable Long memberId) {
         logger.info("GET /score/member/{}", memberId);
-        ResponseEntity<ScoreDTO> response = scoreService.getScoreByMemberId(memberId);
+        ResponseEntity<ScoreDTO> response = scoreService.calculateScore(memberId);
         logger.info("Response: {}", response);
         return response;
     }
