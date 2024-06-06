@@ -7,6 +7,7 @@ import com.example.agricolaserver.member.domain.Member;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -48,6 +49,10 @@ public class FarmService {
 
         return farmRepository.save(farm);
     }
+
+    @Transactional(readOnly = true)
+    public int countFarmsByMember(Member member) {
+        List<Farm> farms = farmRepository.findByMember(member);
+        return farms.size();
+    }
 }
-
-

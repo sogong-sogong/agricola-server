@@ -6,10 +6,10 @@ import com.example.agricolaserver.family.domain.Family;
 import com.example.agricolaserver.family.repository.FamilyRepository;
 import com.example.agricolaserver.house.domain.House;
 import com.example.agricolaserver.house.repository.HouseRepository;
-import com.example.agricolaserver.farm.domain.Farm; // 테스트
-import com.example.agricolaserver.farm.repository.FarmRepository; // 테스트
-import com.example.agricolaserver.cage.domain.Cage; // 테스트
-import com.example.agricolaserver.cage.repository.CageRepository; // 테스트
+import com.example.agricolaserver.farm.domain.Farm;
+import com.example.agricolaserver.farm.repository.FarmRepository;
+import com.example.agricolaserver.cage.domain.Cage;
+import com.example.agricolaserver.cage.repository.CageRepository;
 import com.example.agricolaserver.job.service.JobService;
 import com.example.agricolaserver.member.domain.Member;
 import com.example.agricolaserver.member.repository.MemberRepository;
@@ -45,8 +45,8 @@ public class RoomService {
     private final MemberRepository memberRepository;
     private final StorageRepository storageRepository;
     private final HouseRepository houseRepository;
-    private final FarmRepository farmRepository; // 테스트
-    private final CageRepository cageRepository; // 테스트
+    private final FarmRepository farmRepository;
+    private final CageRepository cageRepository;
     private final FamilyRepository familyRepository;
     private final JobService jobService;
     private final AuxiliaryEquipmentService auxiliaryEquipmentService;
@@ -97,22 +97,38 @@ public class RoomService {
                 food = 2;
             } else
                 food = 3;
-            Storage storage = Storage.builder().memberId(member).food(food).build(); //멤버 자원 초기화
+            
+            // 멤버 자원 초기화
+            Storage storage = Storage.builder().memberId(member).food(food).build();
             storageRepository.save(storage);
-            House house1 = House.builder().member(member).type("wood").xy(6).build(); //집 초기화
+
+            // 집 초기화
+            House house1 = House.builder().member(member).type("wood").xy(6).build();
             House house2 = House.builder().member(member).type("wood").xy(11).build();
             houseRepository.saveAll(Arrays.asList(house1, house2));
-            Farm farm1 = Farm.builder().member(member).type(0).xy(3).crop(0).build(); // 테스트용! 밭 초기화
-            Farm farm2 = Farm.builder().member(member).type(1).xy(4).crop(2).build(); // 테스트용! 밭 초기화
-            Cage cage1 = Cage.builder().member(member).type(0).stock(0).xy(8).stock_cnt(1).field(0).build(); // 테스트용! 밭 초기화
-            Cage cage2 = Cage.builder().member(member).type(1).stock(1).xy(9).stock_cnt(2).field(0).build(); // 테스트용! 우리 초기화
-            farmRepository.saveAll(Arrays.asList(farm1, farm2));
-            cageRepository.saveAll(Arrays.asList(cage1, cage2));
-            Family family1 = Family.builder().member(member).room(room).xy(6).status(true).build(); //가족 초기화
+
+            // [테스트용] 밭 초기화
+            // Farm farm1 = Farm.builder().member(member).type(0).xy(3).crop(0).build();
+            // Farm farm2 = Farm.builder().member(member).type(1).xy(4).crop(2).build();
+            // farmRepository.saveAll(Arrays.asList(farm1, farm2));
+
+            // [테스트용] 우리 초기화
+            // Cage cage1 = Cage.builder().member(member).type(0).stock(0).xy(8).stock_cnt(5).build();
+            // Cage cage2 = Cage.builder().member(member).type(2).stock(1).xy(9).stock_cnt(3).build();
+            // Cage cage3 = Cage.builder().member(member).type(2).stock(2).xy(10).stock_cnt(4).build();
+            // cageRepository.saveAll(Arrays.asList(cage1, cage2, cage3));
+
+            // 가족 초기화
+            Family family1 = Family.builder().member(member).room(room).xy(6).status(true).build();
             Family family2 = Family.builder().member(member).room(room).xy(11).status(true).build();
-            familyRepository.saveAll(Arrays.asList(family1, family2)); //가족 초기화
+            familyRepository.saveAll(Arrays.asList(family1, family2));
+
+            // 직업 카드 초기화
             jobService.initCard(room, member);
-            auxiliaryEquipmentService.initCard(room,member); //보조 설비 카드 초기화
+
+            // 보조 설비 카드 초기화
+            auxiliaryEquipmentService.initCard(room,member);
+
             Boolean starter = Objects.equals(room.getStarter(), member.getNumber());
             Score score = Score.builder().member(member).build();
             scoreRepository.save(score);
