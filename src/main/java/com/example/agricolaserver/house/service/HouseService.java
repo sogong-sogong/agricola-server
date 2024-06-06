@@ -1,6 +1,5 @@
 package com.example.agricolaserver.house.service;
 
-import com.example.agricolaserver.cage.domain.Cage;
 import com.example.agricolaserver.house.domain.House;
 import com.example.agricolaserver.house.dto.UpdateHouseRequestDTO;
 import com.example.agricolaserver.house.repository.HouseRepository;

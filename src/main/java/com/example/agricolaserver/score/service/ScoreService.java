@@ -10,6 +10,8 @@ import com.example.agricolaserver.storage.repository.StorageRepository;
 import com.example.agricolaserver.farm.service.FarmService;
 import com.example.agricolaserver.cage.service.CageService;
 import com.example.agricolaserver.house.service.HouseService;
+import com.example.agricolaserver.auxiliaryequipment.service.AuxiliaryEquipmentService;
+// import com.example.agricolaserver.equipment.service.EquipmentService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,14 +26,22 @@ public class ScoreService {
     private final FarmService farmService;
     private final CageService cageService;
     private final HouseService houseService;
+    private final AuxiliaryEquipmentService auxiliaryEquipmentService;
     private final MemberRepository memberRepository;
 
-    public ScoreService(ScoreRepository scoreRepository, StorageRepository storageRepository, FarmService farmService, CageService cageService, HouseService houseService, MemberRepository memberRepository) {
+    public ScoreService(ScoreRepository scoreRepository,
+                        StorageRepository storageRepository,
+                        FarmService farmService,
+                        CageService cageService,
+                        HouseService houseService,
+                        AuxiliaryEquipmentService auxiliaryEquipmentService,
+                        MemberRepository memberRepository) {
         this.scoreRepository = scoreRepository;
         this.storageRepository = storageRepository;
         this.farmService = farmService;
         this.cageService = cageService;
         this.houseService = houseService;
+        this.auxiliaryEquipmentService = auxiliaryEquipmentService;
         this.memberRepository = memberRepository;
     }
 
@@ -142,6 +152,9 @@ public class ScoreService {
                     + houseService.countStoneHouseByMember(member);
         score.setBlank(blank);
     
+        // 카드 점수 계산
+        score.setCard(auxiliaryEquipmentService.getAuxScoreByMemberId(member));
+
         // 최종 점수 설정
         score.setScore(score.getFarm()
                      + score.getCage()
