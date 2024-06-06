@@ -28,10 +28,4 @@ public class Farm {
         this.xy = xy;
         this.crop = crop;
     }
-
-    public void updatefarm(Integer type,Integer xy,Integer crop){
-        this.type = type;
-        this.xy = xy;
-        this.crop = crop;
-    }
 }

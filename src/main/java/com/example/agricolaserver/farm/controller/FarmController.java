@@ -46,8 +46,11 @@ public class FarmController {
     }    
 
     @PutMapping("/farmId/{farmId}")
-    public ResponseEntity<GetFarmResponse> updateFarm(@PathVariable Long farmId, @RequestBody UpdateFarmRequestDTO updateFarmRequestDTO) {
-        Farm updatedFarm = farmService.updateFarm(farmId, updateFarmRequestDTO);
-        return ResponseEntity.ok(GetFarmResponse.from(updatedFarm));
+    public ResponseEntity<GetFarmResponse> createOrUpdateFarm(@PathVariable Long memberId, @RequestBody UpdateFarmRequestDTO updateFarmRequestDTO) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("Member not found with id: " + memberId));
+
+        Farm farm = farmService.updateFarm(member, updateFarmRequestDTO);
+        return ResponseEntity.ok(GetFarmResponse.from(farm));
     }
 }
