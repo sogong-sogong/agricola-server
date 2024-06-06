@@ -46,8 +46,11 @@ public class CageController {
     }    
 
     @PutMapping("/cageId/{cageId}")
-    public ResponseEntity<GetCageResponse> updateCage(@PathVariable Long cageId, @RequestBody UpdateCageRequestDTO updateCageRequestDTO) {
-        Cage updatedCage = cageService.updateCage(cageId, updateCageRequestDTO);
-        return ResponseEntity.ok(GetCageResponse.from(updatedCage));
+    public ResponseEntity<GetCageResponse> createOrUpdateCage(@PathVariable Long memberId, @RequestBody UpdateCageRequestDTO updateCageRequestDTO) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("Member not found with id: " + memberId));
+
+        Cage cage = cageService.updateCage(member, updateCageRequestDTO);
+        return ResponseEntity.ok(GetCageResponse.from(cage));
     }
 }
