@@ -118,7 +118,7 @@ public class RoomService {
             // Farm farm2 = Farm.builder().member(member).type(1).xy(4).crop(2).build();
             // farmRepository.saveAll(Arrays.asList(farm1, farm2));
 
-            // [테스트용] 우리 초기화
+            // // [테스트용] 우리 초기화
             // Cage cage1 = Cage.builder().member(member).type(0).stock(0).xy(8).stock_cnt(5).build();
             // Cage cage2 = Cage.builder().member(member).type(2).stock(1).xy(9).stock_cnt(3).build();
             // Cage cage3 = Cage.builder().member(member).type(2).stock(2).xy(10).stock_cnt(4).build();
