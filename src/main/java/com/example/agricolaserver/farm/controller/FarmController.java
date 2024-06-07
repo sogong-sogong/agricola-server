@@ -1,5 +1,6 @@
 package com.example.agricolaserver.farm.controller;
 
+
 import com.example.agricolaserver.farm.domain.Farm;
 import com.example.agricolaserver.farm.dto.GetFarmResponse;
 import com.example.agricolaserver.farm.dto.FarmDTO;
@@ -31,21 +32,21 @@ public class FarmController {
     public ResponseEntity<List<FarmDTO>> getFarms(@PathVariable Long memberId) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new IllegalArgumentException("Member not found with id: " + memberId));
-    
+
         List<Farm> farms = farmRepository.findByMember(member);
-    
+
         if (farms.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-    
-        List<FarmDTO> farmDTOs = farms.stream()
-                .map(farm -> FarmDTO.makeFarmDTO(farm))
-                .collect(Collectors.toList());
-    
-        return ResponseEntity.ok(farmDTOs);
-    }    
 
-    @PutMapping("/farmId/{farmId}")
+        List<FarmDTO> farmDTOs = farms.stream()
+                .map(FarmDTO::makeFarmDTO)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(farmDTOs);
+    }
+
+    @PutMapping("/member/{memberId}")
     public ResponseEntity<GetFarmResponse> createOrUpdateFarm(@PathVariable Long memberId, @RequestBody UpdateFarmRequestDTO updateFarmRequestDTO) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new IllegalArgumentException("Member not found with id: " + memberId));

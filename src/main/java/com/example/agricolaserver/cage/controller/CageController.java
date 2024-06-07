@@ -1,5 +1,6 @@
 package com.example.agricolaserver.cage.controller;
 
+
 import com.example.agricolaserver.cage.domain.Cage;
 import com.example.agricolaserver.cage.dto.GetCageResponse;
 import com.example.agricolaserver.cage.dto.CageDTO;
@@ -31,21 +32,21 @@ public class CageController {
     public ResponseEntity<List<CageDTO>> getCages(@PathVariable Long memberId) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new IllegalArgumentException("Member not found with id: " + memberId));
-    
+
         List<Cage> cages = cageRepository.findByMember(member);
-    
+
         if (cages.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-    
-        List<CageDTO> cageDTOs = cages.stream()
-                .map(cage -> CageDTO.makeCageDTO(cage))
-                .collect(Collectors.toList());
-    
-        return ResponseEntity.ok(cageDTOs);
-    }    
 
-    @PutMapping("/cageId/{cageId}")
+        List<CageDTO> cageDTOs = cages.stream()
+                .map(CageDTO::makeCageDTO)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(cageDTOs);
+    }
+
+    @PutMapping("/member/{memberId}")
     public ResponseEntity<GetCageResponse> createOrUpdateCage(@PathVariable Long memberId, @RequestBody UpdateCageRequestDTO updateCageRequestDTO) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new IllegalArgumentException("Member not found with id: " + memberId));
