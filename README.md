@@ -1,8 +1,16 @@
-# agricola-server
+# 아그리콜라 온라인 보드게임 - Back-end
+<br>
 
-## 사용 기술 
-Spring Boot | WebSocket STOMP 
+## 사용 기술 및 구현한 기능
+### * Spring Boot | WebSocket STOMP <br>
+  * Rest API 및 WebSocket API 구현 
 
-### Front-End Repository
-[link](https://github.com/sogong-sogong/agricola-frontend)
 
+## Front-End Repository
+* [link](https://github.com/sogong-sogong/agricola-frontend)
+
+
+## Architecture Design
+* MVC 패턴
+* 도메인형 <br>
+<img width="239" alt="스크린샷 2024-06-09 오전 12 56 15" src="https://github.com/sogong-sogong/agricola-server/assets/91944385/0e836fa2-c2b9-43f6-a86d-ec9d942fddd2"/>
