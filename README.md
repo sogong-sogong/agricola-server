@@ -8,6 +8,11 @@
 ## Front-End Repository
 * [link](https://github.com/sogong-sogong/agricola-frontend)
 
+## Back-end 멤버
+오유정 | https://github.com/21yuyu99<br>
+문수인 | https://github.com/Moonsooin<br>
+박정민 | https://github.com/snavellib
+
 
 ## Architecture Design
 * MVC 패턴
