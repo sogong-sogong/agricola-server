@@ -1,9 +1,8 @@
 # 아그리콜라 온라인 보드게임 - Back-end
-<br>
 
-## 사용 기술 및 구현한 기능
-### * Spring Boot | WebSocket STOMP <br>
-  * Rest API 및 WebSocket API 구현 
+## Skill
+* Spring Boot | WebSocket STOMP | H2 Database <br>
+* Rest API 및 WebSocket API 구현 
 
 
 ## Front-End Repository
