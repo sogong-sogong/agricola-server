@@ -1,5 +1,7 @@
 package com.example.agricolaserver.job.service;
 
+import com.example.agricolaserver.auxiliaryequipment.domain.AuxiliaryEquipment;
+import com.example.agricolaserver.auxiliaryequipment.dto.AuxiliaryEquipmentDTO;
 import com.example.agricolaserver.job.domain.Job;
 import com.example.agricolaserver.job.dto.JobDTO;
 import com.example.agricolaserver.job.repository.JobRepository;
@@ -55,13 +57,30 @@ public class JobService {
 
     // 각 멤버별로 카드를 분배하는 코드
     // member1: jobid 1~7번 카드, member2: jobid 8~14번 카드, member3: jobid 15~21번 카드, member4: jobid 22~28번 카드를 받음.
-    public void initCard(Room room, Member member) {
-        int startId = (int) ((member.getId() - 1) * 7 + 1);
-        int endId = (int) (member.getId() * 7);
-        for (int i = startId; i <= endId; i++) {
-            JobDTO info = JOB_INFO_MAP.get(i);
+    // public void initCard(Room room, Member member) {
+    //     int startId = (int) ((member.getId() - 1) * 7 + 1);
+    //     int endId = (int) (member.getId() * 7);
+    //     for (int i = startId; i <= endId; i++) {
+    //         JobDTO info = JOB_INFO_MAP.get(i);
+    //         if (info != null) {
+    //             Job job = Job.builder().id(Integer.toString(info.getJobId())).member(member).room(room).open(false).build();
+    //             jobRepository.save(job);
+    //         }
+    //     }
+    // }
+
+    // 시나리오 카드 분배
+    // member1에게 6번 카드(재산 관리인) 분배
+    public void initScenarioCard(Room room, Member member) {
+        if (member.getId() == 1) {
+            JobDTO info = JOB_INFO_MAP.get(6);
             if (info != null) {
-                Job job = Job.builder().id(Integer.toString(info.getJobId())).member(member).room(room).open(false).build();
+                Job job = Job.builder()
+                             .id(Integer.toString(info.getJobId()))
+                             .member(member)
+                             .room(room)
+                             .open(false)
+                             .build();
                 jobRepository.save(job);
             }
         }

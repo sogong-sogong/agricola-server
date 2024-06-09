@@ -127,13 +127,16 @@ public class RoomService {
             familyRepository.saveAll(Arrays.asList(family1, family2));
 
             // 직업 카드 초기화
-            jobService.initCard(room, member);
+            // jobService.initCard(room, member);
+            jobService.initScenarioCard(room, member);
 
             // 보조 설비 카드 초기화
-            auxiliaryEquipmentService.initCard(room, member);
+            // auxiliaryEquipmentService.initCard(room, member);
+            auxiliaryEquipmentService.initScenarioCard(room, member);
 
             // [테스트용] 주요 설비 카드 초기화
             // equipmentService.initCard(room, member);
+            equipmentService.initScenarioCard(room, member);
 
             Boolean starter = Objects.equals(room.getStarter(), member.getNumber());
             Score score = Score.builder().member(member).build();
