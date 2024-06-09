@@ -14,7 +14,7 @@
 박정민 | https://github.com/snavellib
 
 
-## Architecture Design
+## Directory 구조
 * MVC 패턴
 * 도메인형 <br>
 <img width="239" alt="스크린샷 2024-06-09 오전 12 56 15" src="https://github.com/sogong-sogong/agricola-server/assets/91944385/0e836fa2-c2b9-43f6-a86d-ec9d942fddd2"/>
