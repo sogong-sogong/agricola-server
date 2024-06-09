@@ -3,6 +3,8 @@ package com.example.agricolaserver.equipment.service;
 import com.example.agricolaserver.equipment.domain.Equipment;
 import com.example.agricolaserver.equipment.dto.EquipmentDTO;
 import com.example.agricolaserver.equipment.repository.EquipmentRepository;
+import com.example.agricolaserver.job.domain.Job;
+import com.example.agricolaserver.job.dto.JobDTO;
 import com.example.agricolaserver.member.domain.Member;
 import com.example.agricolaserver.room.domain.Room;
 import jakarta.transaction.Transactional;
@@ -37,14 +39,31 @@ public class EquipmentService {
 
     // 각 멤버별로 카드를 분배하는 코드
     // member1: equid 1~2번 카드, member2: equid 3~4번 카드, member3: equid 5~6번 카드, member4: equid 7~8번 카드를 받음.
-    public void initCard(Room room, Member member) {
-        int startId = (int) ((member.getId() - 1) * 2 + 1);
-        int endId = (int) (member.getId() * 2);
-        for (int i = startId; i <= endId; i++) {
-            EquipmentDTO info = EQUIPMENT_INFO_MAP.get(i);
+    // public void initCard(Room room, Member member) {
+    //     int startId = (int) ((member.getId() - 1) * 2 + 1);
+    //     int endId = (int) (member.getId() * 2);
+    //     for (int i = startId; i <= endId; i++) {
+    //         EquipmentDTO info = EQUIPMENT_INFO_MAP.get(i);
+    //         if (info != null) {
+    //             int score = info.getScore();
+    //             Equipment equipment = Equipment.builder().id(Integer.toString(info.getEquipmentId())).member(member).room(room).score(score).build();
+    //             equipmentRepository.save(equipment);
+    //         }
+    //     }
+    // }
+
+    // 시나리오 카드 분배
+    // member3에게 1번 카드(화로 - 점토 2개) 분배
+    public void initScenarioCard(Room room, Member member) {
+        if (member.getId() == 3) {
+            EquipmentDTO info = EQUIPMENT_INFO_MAP.get(1);
             if (info != null) {
-                int score = info.getScore();
-                Equipment equipment = Equipment.builder().id(Integer.toString(info.getEquipmentId())).member(member).room(room).score(score).build();
+                Equipment equipment = Equipment.builder()
+                             .id(Integer.toString(info.getEquipmentId()))
+                             .member(member)
+                             .room(room)
+                             .score(info.getScore())
+                             .build();
                 equipmentRepository.save(equipment);
             }
         }

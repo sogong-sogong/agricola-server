@@ -55,13 +55,31 @@ public class AuxiliaryEquipmentService {
 
     // 각 멤버별로 카드를 분배하는 코드
     // member1: auxid 1~7번 카드, member2: auxid 8~14번 카드, member3: auxid 15~21번 카드, member4: auxid 22~28번 카드를 받음.
-    public void initCard(Room room, Member member) {
-        int startId = (int) ((member.getId() - 1) * 7 + 1);
-        int endId = (int) (member.getId() * 7);
-        for (int i = startId; i <= endId; i++) {
-            AuxiliaryEquipmentDTO info = EQUIPMENT_INFO_MAP.get(i);
+    // public void initCard(Room room, Member member) {
+    //     int startId = (int) ((member.getId() - 1) * 7 + 1);
+    //     int endId = (int) (member.getId() * 7);
+    //     for (int i = startId; i <= endId; i++) {
+    //         AuxiliaryEquipmentDTO info = EQUIPMENT_INFO_MAP.get(i);
+    //         if (info != null) {
+    //             AuxiliaryEquipment auxiliaryEquipment = AuxiliaryEquipment.builder().id(Integer.toString(info.getAuxId())).member(member).room(room).score(info.getScore()).open(false).build();
+    //             auxiliaryEquipmentRepository.save(auxiliaryEquipment);
+    //         }
+    //     }
+    // }
+
+    // 시나리오 카드 분배
+    // member1에게 2번 카드 (물통) 분배
+    public void initScenarioCard(Room room, Member member) {
+        if (member.getId() == 1) {
+            AuxiliaryEquipmentDTO info = EQUIPMENT_INFO_MAP.get(2);
             if (info != null) {
-                AuxiliaryEquipment auxiliaryEquipment = AuxiliaryEquipment.builder().id(Integer.toString(info.getAuxId())).member(member).room(room).score(info.getScore()).open(false).build();
+                AuxiliaryEquipment auxiliaryEquipment = AuxiliaryEquipment.builder()
+                                                                        .id(Integer.toString(info.getAuxId()))
+                                                                        .member(member)
+                                                                        .room(room)
+                                                                        .score(info.getScore())
+                                                                        .open(false)
+                                                                        .build();
                 auxiliaryEquipmentRepository.save(auxiliaryEquipment);
             }
         }
