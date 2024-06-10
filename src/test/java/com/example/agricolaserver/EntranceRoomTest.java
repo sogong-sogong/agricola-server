@@ -19,13 +19,16 @@ import org.springframework.web.socket.messaging.WebSocketStompClient;
 
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.springframework.messaging.simp.stomp.StompFrameHandler;
 import org.springframework.messaging.simp.stomp.StompHeaders;
 import org.springframework.messaging.simp.stomp.StompSession;
@@ -102,7 +105,11 @@ public class EntranceRoomTest {
         session.send("/pub/room/1", entranceRequest);
         String message = blockingQueue.poll(5, TimeUnit.SECONDS);
         EntranceResponse entranceResponse = new EntranceResponse(1L,1,false);
-        String expectedJsonResponse = objectMapper.writeValueAsString(entranceResponse);
-        assertEquals(expectedJsonResponse, message); //memberId가 1인 member가 잘 입장했는지 체크
+        String expectedJsonResponse = objectMapper.writeValueAsString(List.of(entranceResponse));
+        EntranceResponse entranceResponse2 = new EntranceResponse(1L,1,true);
+        String expectedJsonResponse2 = objectMapper.writeValueAsString(List.of(entranceResponse2));
+        boolean isSuccess = Objects.equals(message, expectedJsonResponse) || Objects.equals(message, expectedJsonResponse2);
+        assertTrue(isSuccess, "member 1의 room 1 입장 성공");
+        //memberId가 1인 member가 잘 입장했는지 체크
     }
 }

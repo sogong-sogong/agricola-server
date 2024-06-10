@@ -61,5 +61,3 @@ public class CheckStorageTest {
         assertThat(commonStorage.cow()).isEqualTo(17);
     }
 }
-
-
