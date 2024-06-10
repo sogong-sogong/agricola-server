@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CommonStorageRepository extends JpaRepository<CommonStorage, Room> {
+public interface CommonStorageRepository extends JpaRepository<CommonStorage, Long> {
     CommonStorage findByRoom(Room room);
 }

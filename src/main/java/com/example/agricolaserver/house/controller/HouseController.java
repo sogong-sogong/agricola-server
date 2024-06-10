@@ -46,9 +46,12 @@ public class HouseController {
         return ResponseEntity.ok(houseDTOs);
     }
 
-    @PutMapping("/houseId/{houseId}")
-    public ResponseEntity<GetHouseResponse> updateHouse(@PathVariable Long houseId, @RequestBody UpdateHouseRequestDTO updateHouseRequestDTO) {
-        House updatedHouse = houseService.updateHouse(houseId, updateHouseRequestDTO);
-        return ResponseEntity.ok(GetHouseResponse.from(updatedHouse));
+    @PutMapping("/member/{memberId}")
+    public ResponseEntity<GetHouseResponse> createOrUpdateHouse(@PathVariable Long memberId, @RequestBody UpdateHouseRequestDTO updateHouseRequestDTO) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("Member not found with id: " + memberId));
+
+        House house = houseService.updateHouse(member, updateHouseRequestDTO);
+        return ResponseEntity.ok(GetHouseResponse.from(house));
     }
 }

@@ -38,7 +38,7 @@ public class CommonStorageController {
 
     }
 
-    @MessageMapping("/room/common/update")
+    @MessageMapping("/room/{roomId}/common/update")
     @SendTo("/sub/room/{roomId}")
     public GetCommonStorageResponse getCommonStorage(@Payload UpdateCommonStorageRequestDTO requestDTO) {
         Room room = requestDTO.getRoomId();

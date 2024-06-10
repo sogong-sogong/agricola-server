@@ -41,7 +41,7 @@ public class Storage {
     private Integer pig;
     @ColumnDefault("0")
     private Integer cow;
-    @ColumnDefault("3")
+    @ColumnDefault("2")
     private Integer family;
     @ColumnDefault("15")
     private Integer fence;

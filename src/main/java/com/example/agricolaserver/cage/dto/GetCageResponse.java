@@ -10,7 +10,6 @@ public class GetCageResponse {
     private Integer stock;
     private Integer xy;
     private Integer stock_cnt;
-    private Integer field;
 
     public static GetCageResponse from(Cage cage) {
         GetCageResponse response = new GetCageResponse();
@@ -19,7 +18,6 @@ public class GetCageResponse {
         response.stock = cage.getStock();
         response.xy = cage.getXy();
         response.stock_cnt = cage.getStock_cnt();
-        response.field = cage.getField();
         return response;
     }
 }

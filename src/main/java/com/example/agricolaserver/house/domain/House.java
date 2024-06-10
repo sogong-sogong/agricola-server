@@ -28,10 +28,4 @@ public class House {
         this.xy = xy;
         this.stock_type = stock_type;
     }
-
-    public void updatehouse(String type,Integer xy,Integer stock_type){
-        this.type = type;
-        this.xy = xy;
-        this.stock_type = stock_type;
-    }
 }
